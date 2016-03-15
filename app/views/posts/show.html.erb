@@ -1,0 +1,18 @@
+<h1>Post's details</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Content</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= @post.title %></td>
+			<td><%= truncate(@post.content, length: 70, separator: ' ') %></td>
+			<td><%= link_to 'Edit', edit_post_path(@post) %></td>
+			<td><%= link_to 'Back', posts_path %></td>
+		</tr>
+	</tbody>
+</table>
