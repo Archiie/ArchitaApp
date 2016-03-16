@@ -5,13 +5,18 @@
 		<tr>
 			<th>Title</th>
 			<th>Content</th>
+			<th>User</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td><%= @post.title %></td>
-			<td><%= truncate(@post.content, length: 70, separator: ' ') %></td>
-			<td><%= link_to 'Edit', edit_post_path(@post) %></td>
+			<td><%= truncate(@post.content, length: 65, separator: ' ') %></td>
+			<td><%= @post.user.email %></td>
+			<% if @post.user == current_user %>   <!-- user_signed_in? helper will display these 2 links if u r logged in, irrespective of any user :- which is not good -->
+				<td><%= link_to 'Edit', edit_post_path(@post) %></td>
+				<td><%= link_to 'Destroy', post_path(@post), method: :delete, data: {confirm: "Are you sure ?"} %></td>
+			<% end %>
 			<td><%= link_to 'Back', posts_path %></td>
 		</tr>
 	</tbody>

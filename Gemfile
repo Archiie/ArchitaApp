@@ -38,6 +38,9 @@ group :development, :test do
 
   #creating fake data
   gem 'faker'
+
+  #user authentication
+  gem 'devise'
 end
 
 group :development do

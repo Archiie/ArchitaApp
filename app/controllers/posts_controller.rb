@@ -1,14 +1,17 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except:[:index, :show]
+
+  
   def index
   	@posts = Post.all.order(id: :desc)
   end
 
   def new
-  	@post = Post.new
+  	@post = current_user.posts.build
   end
 
   def create
-  	@post = Post.new(post_params)
+  	@post = current_user.posts.build(post_params) #instead of Post.new, use "current_user.posts.build" after installing devise gem & creating first user by signing up
 
   	if @post.save
   		redirect_to posts_path
@@ -32,6 +35,13 @@ class PostsController < ApplicationController
   	else
   		render 'Edit'
   	end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to posts_path
   end
 
   private
